@@ -26,13 +26,13 @@ void loop()
   {
     adc = samples(0);   // get avg ADC value from channel 0
     
-    if(adc >= 30000 && g > 0)  // if ADC is getting pegged at maximum value and is not the widest voltage range already, reduce the gain
+    if(abs(adc) >= 30000 && g > 0)  // if ADC is getting pegged at maximum value and is not the widest voltage range already, reduce the gain
     {
       Serial.println("Reducing gain..");
       g--;
       ads.setGain(gain[g]);
     }
-    else if(adc <= 7000 && g < 5)
+    else if(abs(adc) <= 7000 && g < 5)
     {
       Serial.println("Increasing gain..");  // if ADC is reading very low values and is not the lowest voltage range already, increase the gain
       g++;
